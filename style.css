@@ -1,0 +1,9 @@
+body {
+	background: #333;
+}
+canvas, center{
+	border: 3px solid #333;
+}
+center{
+	background: white;
+}
