@@ -1,6 +1,8 @@
 var lineWidth = 10;
 var color = "#333333";
 
+function ret() {return false}
+
 function update(property) {
 	if(property == 1) lineWidth = document.querySelector("#lineWidth").value;
 	if(property == 2) color = document.querySelector("#color").value;
@@ -11,7 +13,7 @@ window.addEventListener("load", () => {
 	const ctx = canvas.getContext("2d");
 	
 	canvas.width = window.innerWidth / 1.1;
-	canvas.height = window.innerHeight / 1.2;
+	canvas.height = window.innerHeight / 1.25;
 	
 	var painting = false;
 	
@@ -53,6 +55,7 @@ window.addEventListener("load", () => {
 		ctx.beginPath();
 		ctx.moveTo(x_2, y_2);
 	}
+	 document.getElementById("clearCanvas").addEventListener("click", () => { ctx.clearRect(0, 0, canvas.width, canvas.height) });
 	canvas.addEventListener("mousedown", startPainting);
 	canvas.addEventListener("mouseup", finishPainting);
 	canvas.addEventListener("mousemove", paint);
