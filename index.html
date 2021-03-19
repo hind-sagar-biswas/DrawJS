@@ -47,7 +47,7 @@ window.addEventListener("load", () => {
 	const canvas = document.querySelector("#canvas");
 	const ctx = canvas.getContext("2d");
 	
-	canvas.width = window.innerWidth / 1.1;
+	canvas.width = window.innerWidth - 12;
 	canvas.height = window.innerHeight / 1.25;
 	
 	var painting = false;
@@ -66,10 +66,10 @@ window.addEventListener("load", () => {
 		ctx.lineWidth = 10;
 		ctx.lineCap = "round";
 		
-		ctx.lineTo(e.clientX, e.clientY);
+		ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 		ctx.stroke();
 		ctx.beginPath();
-		ctx.moveTo(e.clientX, e.clientY);
+		ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 	}
 	function paintOnTouch(e) {
 		if(!painting) return;
