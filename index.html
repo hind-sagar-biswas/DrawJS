@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
 	<meta charset="utf-8">
 	<meta name="language" content="english"> 
 	<meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -13,21 +12,25 @@
 	
 	<title>Draw JS</title>
 	
+	<!--fontawsome-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">		
+	
 	<link rel="stylesheet" href="https://hind-sagar-biswas.github.io/uikit-cdn/css/uikit.gradient.min.css" />
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<center>
 		<br>
-		<form class="uk-form" onsubmit="return ret()">
-				<input id="lineWidth" type="number" value="10" oninput="update(1)">
-			
-				<input id="color" type="color" value="#333333" oninput="update(2)">
+		<div id="form">
+				<input id="lineWidth" type="number" value="10" max="99" oninput="update(1)">
+				<label for="color">
+					<div id="colorDisplay"></div>
+				</label>
+				<input id="color" class="hidden" type="color" value="#333333" oninput="update(2)">
 				
-				<button id="clearCanvas" class="uk-button uk-button-small">
-					CLEAR
-				</button>
-		</form>
+				<label for="clearCanvas"><i class="fas fa-sync-alt"></i></label>
+				<input type="button" id="clearCanvas" class="hidden">
+		</div>
 		<br>
 		<canvas id="canvas"></canvas>
 	</center>
@@ -36,11 +39,12 @@
 var lineWidth = 10;
 var color = "#333333";
 
-function ret() {return false}
-
 function update(property) {
 	if(property == 1) lineWidth = document.querySelector("#lineWidth").value;
-	if(property == 2) color = document.querySelector("#color").value;
+	if(property == 2) {
+			document.querySelector("#colorDisplay").style.background = document.querySelector("#color").value;
+		color = document.querySelector("#color").value;
+	}
 }
 
 window.addEventListener("load", () => {
