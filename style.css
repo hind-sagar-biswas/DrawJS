@@ -3,7 +3,58 @@ body {
 }
 canvas, center{
 	border: 3px solid #333;
+	border-radius: 10px;
+	background: white;
 }
 center{
+	background: #333;
 	background: white;
+}
+#form{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 300px;
+}
+input {
+  text-align:center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+label,
+#lineWidth{
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1/1;
+	border: 1px solid lightgrey;
+	box-shadow: 2px 2px 6px 1px lightgrey;
+	border-radius: 50px;
+}
+#lineWidth{
+	width: 38px;
+}
+#colorDisplay{
+	background: #333;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+}
+.hidden{
+	position: absolute;
+	top: -200px;
+	left: -200px;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
 }
