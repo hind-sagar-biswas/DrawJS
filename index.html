@@ -24,91 +24,57 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">		
 	
 	<link rel="stylesheet" href="https://hind-sagar-biswas.github.io/uikit-cdn/css/uikit.gradient.min.css" />
-		
-<style>
-body {
-	background: #333;
-}
-canvas, center{
-	border: 3px solid #333;
-	border-radius: 10px;
-	background: white;
-}
-center{
-	background: #333;
-	background: white;
-}
-#form{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	width: 300px;
-}
-input {
-  text-align:center;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-label,
-#lineWidth{
-	background: #fff;
-	width: 30px;
-	height: 30px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	aspect-ratio: 1/1;
-	border: 1px solid lightgrey;
-	box-shadow: 2px 2px 6px 1px lightgrey;
-	border-radius: 50px;
-}
-#lineWidth{
-	width: 38px;
-}
-#colorDisplay{
-	background: #333;
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-}
-.hidden{
-	opacity: 0;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-}
-
-</style>
+	<link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 	<center>
-		<br>
+		<p>
+			<b>Project Name: </b>
+			<span id="nameShow"></span>
+		</p>
+		<canvas id="canvas"></canvas>
 		<div id="form">
+				<input id="name" type="text" oninput="update(0)">
+				
 				<input id="lineWidth" type="number" value="10" max="99" oninput="update(1)">
+				
 				<label for="color">
-					<div id="colorDisplay"></div>
+					<div id="colorDisplay">
+						
+					</div>
 				</label>
 				<input id="color" class="hidden" type="color" value="#333333" oninput="update(2)">
-				
-				<label for="clearCanvas"><i class="fas fa-sync-alt"></i></label>
+					
+				<label for="clearCanvas">
+					<i class="fas fa-sync-alt"></i>
+				</label>
 				<input type="button" id="clearCanvas" class="hidden">
+				
+				<label for="download">
+					<i class="fas fa-download"></i>
+				</label>
+				<input type="button" id="download" class="hidden">
+				
 		</div>
-		<br>
-		<canvas id="canvas"></canvas>
 	</center>
 
 <script>
+var name = "drJs-img-";
 var lineWidth = 10;
 var color = "#333333";
 
+var dateObj = new Date();
+name += dateObj.getTime();
+
+document.querySelector("#name"). value = name;
+document.querySelector("#nameShow").innerHTML = name + ".png";
+
 function update(property) {
+	if(property == 0) {
+			document.querySelector("#nameShow").innerHTML = document.querySelector("#name").value;
+		name = document.querySelector("#name").value;
+	}
 	if(property == 1) lineWidth = document.querySelector("#lineWidth").value;
 	if(property == 2) {
 			document.querySelector("#colorDisplay").style.background = document.querySelector("#color").value;
@@ -121,7 +87,7 @@ window.addEventListener("load", () => {
 	const ctx = canvas.getContext("2d");
 	
 	canvas.width = window.innerWidth - 12;
-	canvas.height = window.innerHeight / 1.25;
+	canvas.height = window.innerHeight / 1.5;
 	
 	var painting = false;
 	
@@ -165,6 +131,18 @@ window.addEventListener("load", () => {
 		ctx.moveTo(x_2, y_2);
 	}
 	 document.getElementById("clearCanvas").addEventListener("click", () => { ctx.clearRect(0, 0, canvas.width, canvas.height) });
+	document.querySelector("#download").addEventListener("click", () => {
+		// create temporary link  
+		var tmpLink = document.createElement( 'a' );  
+		tmpLink.download = name + ".png"; // set the name of the download file 
+		tmpLink.href = canvas.toDataURL("image/png");;  
+  	
+		// temporarily add link to body and initiate the download  
+		document.body.appendChild( tmpLink );  
+		tmpLink.click();  
+		document.body.removeChild( tmpLink );
+});
+
 	canvas.addEventListener("mousedown", startPainting);
 	canvas.addEventListener("mouseup", finishPainting);
 	canvas.addEventListener("mousemove", paint);
