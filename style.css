@@ -1,4 +1,6 @@
-body {
+body{
+	padding: 0;
+	margin: 0;
 	background: #333;
 }
 canvas, center{
@@ -15,7 +17,7 @@ center{
 }
 #form{
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	width: 300px;
 	margin: 10px 0;
@@ -51,11 +53,10 @@ label,
 	margin: 0 5px;
 }
 #name{
-	width: 90px;
-	margin: 0 5px;
+	width: 200px;
+	margin: 5px 0;
 	padding: 0 4px;
 }
-
 #colorDisplay{
 	background: #333;
 	width: 25px;
@@ -68,3 +69,10 @@ label,
 	height: 1px;
 	overflow: hidden;
 }
+.absolute{
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+}
+.triggered{}
